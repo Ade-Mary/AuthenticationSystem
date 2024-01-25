@@ -33,3 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 C:\Users\DELL\IdeaProjects\Authentication System\src\main\resources\application.properties
+src/main/resources/application.properties
