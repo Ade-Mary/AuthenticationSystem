@@ -3,12 +3,15 @@ package com.maryj.authenticationsystem.service.impl;
 import com.maryj.authenticationsystem.dto.LoginRequest;
 import com.maryj.authenticationsystem.dto.Request;
 import com.maryj.authenticationsystem.dto.Response;
+import com.maryj.authenticationsystem.dto.UserInfo;
 import com.maryj.authenticationsystem.entity.User;
 import com.maryj.authenticationsystem.repository.UserRepository;
+import com.maryj.authenticationsystem.securityconfig.SecurityConfig;
 import com.maryj.authenticationsystem.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
@@ -18,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private ModelMapper modelMapper;
+    private PasswordEncoder passwordEncoder;
     @Override
     public ResponseEntity<Response> signUp(Request request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()){
@@ -28,14 +32,14 @@ public class UserServiceImpl implements UserService {
         }
         User user = User.builder()
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .build();
         User savedUser =userRepository.save(user);
         return ResponseEntity.ok(Response.builder().statusCode(200)
                 .responseMessage("SUCCESS")
-                .userInfo(modelMapper.map(savedUser, Request.class)).build());
+                .userInfo(modelMapper.map(savedUser, UserInfo.class)).build());
     }
 
     @Override

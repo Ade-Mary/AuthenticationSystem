@@ -1,2 +1,15 @@
-package com.maryj.authenticationsystem.dto;public class OtpResponse {
+package com.maryj.authenticationsystem.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class OtpResponse {
+
+    private Boolean isOtpValid;
 }

@@ -1,0 +1,9 @@
+1.Email configuration and email service
+2.create method tat generate a random four digit code
+3.Entity class for otp, create a method to send the otp
+4.A method to validate the otp (checking the correctness of the code,time elaspement
+
+
+ascertain that the user actually sent an otp
+ascertain the otp hasn't expired
+ascertain the otp is correct
